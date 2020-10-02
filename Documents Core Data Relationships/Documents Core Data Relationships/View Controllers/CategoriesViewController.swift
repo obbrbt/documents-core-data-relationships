@@ -60,7 +60,7 @@ class CategoriesViewController: UIViewController {
     
     func alertDelete(message: String, indexPath: IndexPath) {
         let alert = UIAlertController(title: "Alert", message: message, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Are you sure you want to delete?", style: UIAlertAction.Style.destructive, handler: { (confirmDeleteCategory) in
+        alert.addAction(UIAlertAction(title: "Yes, I'm sure I want to delete.", style: UIAlertAction.Style.destructive, handler: { (confirmDeleteCategory) in
             self.deleteCategory(at: indexPath)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: {
@@ -114,7 +114,7 @@ extension CategoriesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            alertDelete(message: "Yes, I'm sure I want to delete.", indexPath: indexPath)
+            alertDelete(message: "Are you sure you want to delete?", indexPath: indexPath)
         }
     }
     

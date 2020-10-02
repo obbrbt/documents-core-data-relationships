@@ -14,6 +14,7 @@ class NewDocumentViewController: UIViewController, UITextFieldDelegate, UITextVi
     @IBOutlet weak var nameTextField: UITextField!
     
     var document: Document?
+    var category: Category?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +28,6 @@ class NewDocumentViewController: UIViewController, UITextFieldDelegate, UITextVi
         // Dispose of any resources that can be recreated.
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        nameTextField.resignFirstResponder()
-        contentTextView.resignFirstResponder()
-    }
-    
     @IBAction func saveDocument(_ sender: Any) {
         guard let name = nameTextField.text else {
             return
@@ -41,6 +37,8 @@ class NewDocumentViewController: UIViewController, UITextFieldDelegate, UITextVi
         
         if document == nil {
             document = Document(name: name, content: content)
+            category?.addToRawDocuments(document!)
+            
         } else {
             document?.update(name: name, content: content)
         }
@@ -62,12 +60,5 @@ class NewDocumentViewController: UIViewController, UITextFieldDelegate, UITextVi
     
     @IBAction func nameChanged(_ sender: Any) {
         title = nameTextField.text
-    }
-}
-
-extension NewDocumentViewController {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
     }
 }

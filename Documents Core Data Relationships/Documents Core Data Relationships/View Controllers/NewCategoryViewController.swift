@@ -23,9 +23,6 @@ class NewCategoryViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        titleTextField.resignFirstResponder()
-    }
     
     @IBAction func saveCategory(_ sender: Any) {
         let category = Category(title: titleTextField.text ?? "")
@@ -40,9 +37,3 @@ class NewCategoryViewController: UIViewController, UITextFieldDelegate {
     }
 }
 
-extension NewCategoryViewController {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-}

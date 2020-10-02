@@ -29,22 +29,21 @@ class DocumentsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         fetchDocuments()
-        documentsTableView.reloadData()
+        self.documentsTableView.reloadData()
     }
     
     func fetchDocuments() {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
-        
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<Document> = Document.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)] // order results by document name ascending
         
         do {
             documents = try managedContext.fetch(fetchRequest)
         } catch {
-            print("Fetch could not be performed.")
-            
+            print("Fetch for documents could not be performed.")
             return
         }
     }
@@ -63,7 +62,7 @@ class DocumentsViewController: UIViewController {
             return
         }
         
-        destination.document = document
+        destination.category = category
     }
     
     func showAlert(message: String) {
@@ -94,7 +93,7 @@ class DocumentsViewController: UIViewController {
 
 extension DocumentsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return documents.count
+        return category?.documents?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
