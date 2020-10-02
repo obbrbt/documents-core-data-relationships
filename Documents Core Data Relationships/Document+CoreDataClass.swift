@@ -32,4 +32,16 @@ public class Document: NSManagedObject {
         self.rawModifiedDate = Date(timeIntervalSinceNow: 0)
     }
     
+    func update(name: String, content: String?) {
+        self.name = name
+        self.content = content
+        if let size = content?.count {
+            self.size = Int64(size)
+        } else {
+            self.size = 0
+        }
+        
+        self.rawModifiedDate = Date(timeIntervalSinceNow: 0)
+    }
+    
 }

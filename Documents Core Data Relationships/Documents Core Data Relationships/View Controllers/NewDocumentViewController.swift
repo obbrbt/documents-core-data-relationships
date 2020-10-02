@@ -13,6 +13,8 @@ class NewDocumentViewController: UIViewController, UITextFieldDelegate, UITextVi
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var nameTextField: UITextField!
     
+    var document: Document?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,6 +33,35 @@ class NewDocumentViewController: UIViewController, UITextFieldDelegate, UITextVi
     }
     
     @IBAction func saveDocument(_ sender: Any) {
+        guard let name = nameTextField.text else {
+            return
+        }
+        
+        let content = contentTextView.text
+        
+        if document == nil {
+            document = Document(name: name, content: content)
+        } else {
+            document?.update(name: name, content: content)
+        }
+            
+        if let document = document {
+            do {
+                let managedContext = document.managedObjectContext
+                try managedContext?.save()
+            } catch {
+                print("Document could not be saved. \(error).")
+            }
+        } else {
+            print("Document could not be created.")
+        }
+        
+        navigationController?.popViewController(animated: true)
+        
+    }
+    
+    @IBAction func nameChanged(_ sender: Any) {
+        title = nameTextField.text
     }
 }
 

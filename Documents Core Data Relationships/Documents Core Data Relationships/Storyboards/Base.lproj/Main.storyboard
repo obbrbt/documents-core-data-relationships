@@ -202,12 +202,11 @@
                     <navigationItem key="navigationItem" title="Documents" id="p4B-CC-ZRM">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="gbT-TC-niF">
                             <connections>
-                                <action selector="addNewDocument:" destination="ewF-O4-33o" id="9m7-gq-moj"/>
+                                <action selector="addDocument:" destination="ewF-O4-33o" id="4Hz-kr-WRg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addNewDocument" destination="p4B-CC-ZRM" id="K7a-0E-xIJ"/>
                         <outlet property="documentsTableView" destination="vkl-dy-Slv" id="uWK-Zn-AyW"/>
                     </connections>
                 </viewController>
@@ -240,6 +239,9 @@
                                 <rect key="frame" x="78" y="99.5" width="316" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="nameChanged:" destination="O4T-ga-SNi" eventType="editingDidEnd" id="hdE-37-PFs"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="uGE-dA-hDm"/>
